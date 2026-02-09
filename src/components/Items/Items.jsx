@@ -1,32 +1,45 @@
 import './items.scss'
+import { useTree } from "../../context/TreeContext";
 
 const Items = () => {
-  const items = { key1: 150, key2: 100, key3: 50 };
-
-  const total = Object.values(items).reduce((sum, v) => sum + v, 0);
+  const { levels } = useTree();
 
   return (
-    <div className="items">
-      <div className="aligner">
-        {Object.entries(items).map(([key, value]) => {
-          const percentage = (value / total) * 100;
-          return (
-            <div className="item" key={key}>
-                <div className="details">
-                    <div className="label">{key}</div>
-                    <div className="value">{value}</div>
-                </div>
-                
-                <div className="bar">
+    <div className="tree-container">
+      {console.log(levels)}
+      {levels.map((level, idx) => {
+
+        const total = level.items.reduce((s,i)=>s+i.value,0);
+
+        return (
+          <div className="level" key={idx}>
+            <h4>{level.dim}</h4>
+
+            {level.items.map(item => {
+              const pct = (item.value/total)*100;
+
+              return (
+                <div className="item" key={item.node_name}>
+                  <div className="content">
+                    <div>
+                      <span>{item.node_name} </span>
+                      <span className="percentage">{pct.toFixed(2)}%</span>
+                    </div>
+                    <div>{Number(item.value,2).toFixed(2)}</div>
+                  </div>
+
+                  <div className="bar">
                     <div
-                    className="bar-fill"
-                    style={{ width: `${percentage}%` }}
+                      className="bar-fill"
+                      style={{width:`${pct}%`}}
                     />
+                  </div>
                 </div>
-            </div>
-          );
-        })}
-      </div>
+              );
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 };
