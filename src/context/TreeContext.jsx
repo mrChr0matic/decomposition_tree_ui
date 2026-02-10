@@ -42,6 +42,9 @@ export const TreeProvider = ({ children }) => {
   const [selectedValue,setSelectedValue] =
     useState("");
 
+  const [selectedTable, setSelectedTable] = useState("");
+  
+
   const buildFilters = (p)=>{
     const f={};
     p.forEach(x=>{
