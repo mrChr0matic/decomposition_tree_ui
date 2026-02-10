@@ -5,8 +5,20 @@ import { useTree } from "../../context/TreeContext";
 const Items = () => {
   const { path, levels, closeLevel } = useTree();
 
+  const isInPath = (dim,value)=>{
+    return path.some(p =>
+      String(p.dim).toLowerCase().trim()
+        === String(dim).toLowerCase().trim()
+      &&
+      String(p.value).toLowerCase().trim()
+        === String(value).toLowerCase().trim()
+    );
+  };
+
+
   return (
     <div className="tree-container">
+      {console.log("path is ",path)}
       {levels.map((level, idx) => {
         {{console.log("debug",path, "level", levels)}}
         const total = level.items.reduce((s,i)=>s+i.value,0);
@@ -45,9 +57,9 @@ const Items = () => {
                     <div>{Number(item.value,2).toFixed(2)}</div>
                   </div>
 
-                  <div className="bar">
+                  <div className="box">
                     <div
-                      className="bar-fill"
+                      className={isInPath(level.dim, item.node_name) ? `bar-selected` : `bar-fill`}
                       style={{width:`${pct}%`}}
                     />
                   </div>

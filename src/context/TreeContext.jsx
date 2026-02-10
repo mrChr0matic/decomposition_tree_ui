@@ -42,7 +42,6 @@ export const TreeProvider = ({ children }) => {
   const [selectedValue,setSelectedValue] =
     useState("");
 
-  // ---------- BUILD FILTERS ----------
   const buildFilters = (p)=>{
     const f={};
     p.forEach(x=>{
@@ -51,7 +50,6 @@ export const TreeProvider = ({ children }) => {
     return f;
   };
 
-  // ---------- ROOT ----------
   const fetchRoot = async ()=>{
     const res = await getTotalSales(
       "taxi_gold",
@@ -67,7 +65,6 @@ export const TreeProvider = ({ children }) => {
     };
   };
 
-  // ---------- REBUILD TREE ON KPI CHANGE ----------
   useEffect(()=>{
     if(!kpi) return;
     rebuildTree();
@@ -119,7 +116,6 @@ export const TreeProvider = ({ children }) => {
       }
     }
 
-    // restore state
     setPath(savedPath);
 
     const usedDims =
@@ -155,7 +151,6 @@ export const TreeProvider = ({ children }) => {
     return newPath;
   };
 
-  // ---------- FETCH SPLIT ----------
   const fetchSplit = async(
     dim,
     overridePath=null
@@ -190,7 +185,6 @@ export const TreeProvider = ({ children }) => {
     setLoading(false);
   };
 
-  // ---------- RESET ----------
   const resetTree = async ()=>{
     setPath([]);
     setAvailableDims(ALL_DIMS);
@@ -201,7 +195,6 @@ export const TreeProvider = ({ children }) => {
     setLevels([root]);
   };
 
-  // ---------- CLOSE LEVEL ----------
   const closeLevel=(levelIndex)=>{
 
     const newLevels =
@@ -214,7 +207,7 @@ export const TreeProvider = ({ children }) => {
         .map(l=>l.dim)
         .filter(d=>d!=="Total");
 
-    setPath(path.slice(0,usedDims.length));
+    setPath(path.slice(0,usedDims.length-1));
 
     setAvailableDims(
       ALL_DIMS.filter(
