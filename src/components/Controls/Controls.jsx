@@ -28,7 +28,6 @@ const Controls = () => {
 
     let newPath = null;
 
-    // Drill FIRST if needed
     if (
       levels.length > 1 &&
       selectedValue
@@ -36,7 +35,6 @@ const Controls = () => {
       newPath = drillDown();
     }
 
-    // Then fetch
     await fetchSplit(
       selectedDim,
       newPath
@@ -56,7 +54,6 @@ const Controls = () => {
           Reset Tree
         </div>
 
-        {/* VALUE PICKER (not at root) */}
         {levels.length > 1 && (
           <select
             value={selectedValue}
@@ -85,7 +82,6 @@ const Controls = () => {
           </select>
         )}
 
-        {/* DIMENSION PICKER */}
         <select
           value={selectedDim}
           className="dim-dropdown"

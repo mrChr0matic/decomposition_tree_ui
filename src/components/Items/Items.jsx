@@ -18,7 +18,6 @@ const Items = () => {
 
   return (
     <div className="tree-container">
-      {console.log("path is ",path)}
       {levels.map((level, idx) => {
         {{console.log("debug",path, "level", levels)}}
         const total = level.items.reduce((s,i)=>s+i.value,0);
@@ -59,7 +58,7 @@ const Items = () => {
 
                   <div className="box">
                     <div
-                      className={isInPath(level.dim, item.node_name) ? `bar-selected` : `bar-fill`}
+                      className={idx === 0 || isInPath(level.dim, item.node_name) ? `bar-selected` : `bar-fill`}
                       style={{width:`${pct}%`}}
                     />
                   </div>

@@ -57,7 +57,7 @@ export const TreeProvider = ({ children }) => {
     );
 
     return {
-      dim:"Total",
+      dim:kpi,
       items:[{
         node_name:"Total",
         value:res.total
