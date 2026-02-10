@@ -201,13 +201,15 @@ export const TreeProvider = ({ children }) => {
       levels.slice(0,levelIndex);
 
     setLevels(newLevels);
-
+    
     const usedDims =
-      newLevels
-        .map(l=>l.dim)
-        .filter(d=>d!=="Total");
-
-    setPath(path.slice(0,usedDims.length-1));
+    newLevels
+    .map(l=>l.dim)
+    .filter(d=>d!=="Total");
+  
+    console.log("useddimes is ",usedDims)
+    const newPath = path.slice(0, Math.max(0, usedDims.length-2));
+    setPath(newPath);
 
     setAvailableDims(
       ALL_DIMS.filter(
