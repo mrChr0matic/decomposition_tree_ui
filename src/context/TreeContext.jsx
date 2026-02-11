@@ -19,8 +19,6 @@ const ALL_DIMS = [
   "vendor_id",
   "time_bucket",
   "day",
-  "Region",
-  "Country"
 ];
 
 export const TreeProvider = ({ children }) => {
@@ -75,13 +73,14 @@ export const TreeProvider = ({ children }) => {
 
   const rebuildTree = async ()=>{
 
-    setLoading(true);
+    
 
     // Save structure
-    const dimsToReplay =
-      levels
-        .map(l=>l.dim)
-        .filter(d=>d!=="Total");
+  const dimsToReplay =
+    levels
+      .slice(1)        // skip L0
+      .map(l => l.dim);
+
 
     const savedPath=[...path];
 
